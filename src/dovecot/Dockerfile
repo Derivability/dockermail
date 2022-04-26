@@ -5,6 +5,7 @@ apt install dovecot-imapd -y
 
 COPY configs/* /etc/dovecot/conf.d/
 
-RUN useradd -u 5000 -g 5000 vmail -s /usr/sbin/nologin
+RUN groupadd -g 5000 vmail && \
+useradd -u 5000 -g 5000 vmail -s /usr/sbin/nologin
 
 CMD ["dovecot", "-F"]
