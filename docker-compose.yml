@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  dovecot:
+    restart: unless-stopped
+    build:
+      args:
+        DOMAIN: $DOMAIN
+      context: ./src/dovecot
+    ports:
+      - "143:143/tcp"
+    volumes:
+      - ${PWD}/dovecot_users:/dovecot/users
+      - ${PWD}/tls:/dovecot/tls
+      - ${PWD}/vhosts:/dovecot/vhosts
+
+  postfix:
+    restart: unless-stopped
+    build: 
+      args:
+        DOMAIN: $DOMAIN
+      context: ./src/vpn
+    ports:
+      - "25:25/tcp"
+    volumes:
+      - ${PWD}/postfix_vmaps:/postfix/vmaps
+      - ${PWD}/tls:/postfix/tls
+      - ${PWD}/vhosts:/postfix/vhosts
