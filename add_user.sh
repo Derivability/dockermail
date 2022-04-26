@@ -28,3 +28,5 @@ HASH=$(${D_EXEC} dovecot doveadm pw -s SHA512-CRYPT -p ${PASSWORD})
 echo "${USERNAME}@${DOMAIN}:${HASH}" >> ${BASEDIR}/dovecot_users/dovecot_passwd
 echo "${USERNAME}@{DOMAIN} ${USERNAME}" >> ${BASEDIR}/postfix_vmaps/virtual_alias
 echo "${USERNAME} ${DOMAIN}/${USERNAME}/" >> ${BASEDIR}/postfix_vmaps/virtual_mailbox
+
+${D_EXEC} postfix postmap /postfix/vmaps/virtual_alias /postfix/vmaps/virtual_mailbox
