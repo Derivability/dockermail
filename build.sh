@@ -11,13 +11,13 @@ then
     exit 1
 fi
 
-if [ -f "${BASEDIR}/tls/${DOMAIN}/fullchain.pem" ]
+if [ ! -f "${BASEDIR}/tls/${DOMAIN}/fullchain.pem" ]
 then
     echo "No public certificate found at ${BASEDIR}/tls/${DOMAIN}/fullchain.pem"
     exit 2
 fi
 
-if [ -f "${BASEDIR}/tls/${DOMAIN}/privkey.pem" ]
+if [ ! -f "${BASEDIR}/tls/${DOMAIN}/privkey.pem" ]
 then
     echo "No private certificate key found at ${BASEDIR}/tls/${DOMAIN}/privkey.pem"
     exit 3
