@@ -2,7 +2,13 @@
 
 BASEDIR=$(dirname $0)
 D_COMPOSE="docker-compose -f ${BASEDIR}/docker-compose.yml"
-D_EXEC="${D_COMPOSE} exec"
+
+if [ -n "$(${D_COMPOSE} ps -q)" ]
+then
+    D_EXEC="${D_COMPOSE} exec"
+else
+    D_EXEC="${D_COMPOSE} run"
+fi
 
 function read_pass() {
         stty_orig=$(stty -g)
