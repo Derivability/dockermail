@@ -1,0 +1,38 @@
+myhostname = dockermail
+myorigin = $mydomain
+
+inet_interfaces = all
+inet_protocols = all
+
+mydestination = $myhostname, localhost.$myhostname, localhost
+
+mynetworks = 127.0.0.0/8
+home_mailbox = Maildir/
+
+smtpd_banner = $myhostname ESMTP $mail_name
+biff = no
+
+# appending .domain is the MUA's job.
+append_dot_mydomain = no
+
+readme_directory = no
+
+compatibility_level = 2
+
+smtpd_use_tls = yes
+smtpd_tls_auth_only = yes
+smtpd_tls_cert_file = /postfix/tls/__DOMAIN__/fullchain.pem
+smtpd_tls_key_file = /postfix/tls/__DOMAIN__/privkey.pem
+smtpd_tls_security_level = encrypt
+
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = inet:dovecot:42069
+smtpd_sasl_auth_enable = yes
+
+virtual_mailbox_domains = /postfix/vmaps/virtual_domains
+virtual_mailbox_base = /postfix/vhosts
+virtual_mailbox_maps = hash:/postfix/vmaps/virtual_mailbox #postmap me
+virtual_minimum_uid = 100
+virtual_uid_maps = static:5000
+virtual_gid_maps = static:5000
+virtual_alias_maps = hash:/postfix/vmaps/virtual_alias #postmap me
