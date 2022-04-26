@@ -15,7 +15,7 @@ services:
   postfix:
     restart: unless-stopped
     build:
-      context: ./src/vpn
+      context: ./src/postfix
     ports:
       - "25:25/tcp"
     volumes:
