@@ -4,8 +4,6 @@ services:
   dovecot:
     restart: unless-stopped
     build:
-      args:
-        DOMAIN: $DOMAIN
       context: ./src/dovecot
     ports:
       - "143:143/tcp"
@@ -16,9 +14,7 @@ services:
 
   postfix:
     restart: unless-stopped
-    build: 
-      args:
-        DOMAIN: $DOMAIN
+    build:
       context: ./src/vpn
     ports:
       - "25:25/tcp"
