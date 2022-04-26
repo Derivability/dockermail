@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 RUN apt update && apt upgrade -y &&\
-apt install dovecot-imap -y
+apt install dovecot-imapd -y
 
 COPY configs/* /etc/dovecot/conf.d/
 
